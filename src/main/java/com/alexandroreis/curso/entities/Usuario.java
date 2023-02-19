@@ -1,19 +1,22 @@
 package com.alexandroreis.curso.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 
 
 
 @Entity
-@Table(name = "tb_user")
+@Table(name = "usuario")
 public class Usuario implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -25,6 +28,9 @@ public class Usuario implements Serializable {
 	private String email;
 	private String telefone;
 	private String senha;
+	
+	@OneToMany(mappedBy = "cliente")
+	private List<Pedido> pedidos = new ArrayList<>();
 	
 	public Usuario() {
 		
@@ -79,6 +85,10 @@ public class Usuario implements Serializable {
 		this.senha = senha;
 	}
 	
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+	
 
 	@Override
 	public String toString() {
@@ -102,6 +112,8 @@ public class Usuario implements Serializable {
 		Usuario other = (Usuario) obj;
 		return Objects.equals(id, other.id);
 	}
+
+	
 	
 	
 	
